@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Comfy Dungeon</title>
+		<title>WyrmBrush</title>
 
 		<link rel="stylesheet" type="text/css" href="/dungeon/css/uikit.min.css">
 		<link rel="stylesheet" type="text/css" href="/dungeon/css/dungeon.css?v=0.1.0">
@@ -11,7 +11,7 @@
 	<body>
     <!-- LEFT BAR -->
     <aside id="left-col" class="uk-light uk-visible@m">
-      <h4 class="uk-text-center uk-margin-remove-vertical text-light">Comfy Dungeon<small><sup> v0.1.1</sup></small></h4>
+      <h4 class="uk-text-center uk-margin-remove-vertical text-light">WyrmBrush<small><sup> v0.0.1</sup></small></h4>
 
       <div class="left-content-box left-nav-wrap">
         <form class="uk-grid-small">
@@ -22,8 +22,13 @@
               <div class="uk-accordion-content uk-grid-small" uk-grid>
                 <div class="uk-width-1-2@s">
                   <label class="uk-form-label" for="quality-input">Quality</label>
-                  <input class="uk-range" id="quality-input" type="range" value="1" min="0.0" max="1.0" step="0.25" aria-label="Range">
-                  <div class="uk-form-label uk-text-muted" uk-grid><div class="uk-width-1-2@s"><span uk-icon="icon: arrow-left"></span>Speed</div><div class="uk-width-1-2@s" style="text-align:right;">Accuracy<span uk-icon="icon: arrow-right"></span></div></div>
+                  <input class="uk-range" id="quality-input" type="range" value="1" min="10.0" max="120.0" step="1.0" aria-label="Range">
+
+                  <div class="uk-form-label uk-text-muted uk-flex uk-flex-between uk-flex-middle">
+                    <span><span uk-icon="icon: arrow-left"></span>Speed</span>
+                    <input class="uk-input uk-margin-small-left uk-margin-small-right" id="quality-value" type="text" value="1" readonly style="width: 50px; text-align: center;">
+                    <span>Accuracy<span uk-icon="icon: arrow-right"></span></span>
+                  </div>
                 </div>
 
                 <div class="uk-width-1-2@s">
@@ -38,17 +43,14 @@
                 </div>
 
                 <div class="uk-width-1-1@s">
-                  <label class="uk-form-label" for="style-input">Preset</label>
+                  <label class="uk-form-label" for="checkpoint-input">Checkpoint</label>
                   <div class="uk-form-controls">
-                    <select class="uk-select" id="style-input" aria-label="Select">
-                      <option value="ProteusV0.3-LCM">Illustration - Fast</option>
-                      <option value="ProteusV0.3" selected>Illustration - Accurate</option>
-                      <option value="ProteusV0.3-LCM-Anime">Anime - Fast</option>
-                      <option value="ProteusV0.3-Anime">Anime - Accurate</option>
-                      <option value="DreamShaperXLTurboV2-Cinematic">Cinematic</option>
+                    <select class="uk-select" id="checkpoint-input" aria-label="Select">
+                      <!-- Options will be populated dynamically -->
                     </select>
                   </div>
-                </div>  
+                </div>
+                
               </div>
             </div>
 
@@ -180,31 +182,31 @@
                     <select class="uk-select" id="ethnicity-input" aria-label="Select">
                       <option value="">-- undefined --</option>
                       <option value="0">Completely Random</option>
-      
+
                       <option value="1">Africa: Eastern</option>
                       <option value="2">Africa: Middle</option>
                       <option value="3">Africa: Northen</option>
                       <option value="4">Africa: Southern</option>
                       <option value="5">Africa: Western</option>
-      
+
                       <option value="6">America: Central</option>
                       <option value="7">America: Northern</option>
                       <option value="8">America: Sourthern</option>
-      
+
                       <option value="9">Asia: Central</option>
                       <option value="10">Asia: Eastern</option>
                       <option value="11">Asia: South-Eastern</option>
                       <option value="12">Asia: Southern</option>
                       <option value="13">Asia: Western</option>
-      
+
                       <option value="14">Australia &amp; New Zealand</option>
-      
+
                       <option value="15">European: Eastern</option>
                       <option value="16">European: Northern</option>
                       <option value="17">European: Southern</option>
                       <option value="18">European: Western</option>
                       <option value="19">European: Islandic</option>
-      
+
                       <!--option value="20">Carribean</option-->
                       <option value="21">Mela/Micro/Poly-nesia</option>
                     </select>
@@ -227,7 +229,7 @@
                     </select>
                   </div>
                 </div>
-                
+
                 <div class="uk-width-1-2@s">
                   <label class="uk-form-label" for="gear-input">Clothing/Armor</label>
                   <div class="uk-form-controls">
@@ -316,13 +318,13 @@
       </div>
     </aside>
     <!-- /LEFT BAR -->
-  
+
     <!-- CONTENT -->
     <div id="content" class="uk-light" data-uk-height-viewport="expand: true">
       <progress id="main-progress" class="progress" value="0" max="0"></progress>
 
       <div class="uk-text-center uk-container uk-container-expand">
-        <form><button id="roll" class="uk-button uk-button-danger" type="button"><span id="main-spinner" uk-spinner="ratio: 0.7" style="display: none;"></span><span id="roll-icon" uk-icon="icon: bolt"></span>&nbsp;Roll</button><input id="main-seed" class="uk-input" type="text" placeholder="Seed" aria-label="Seed" value="0"><label>Random <input id="is-random" class="uk-checkbox" type="checkbox" checked></label></form>
+        <form><button id="roll" class="uk-button uk-button-danger" type="button"><span id="main-spinner" uk-spinner="ratio: 0.7" style="display: none;"></span><span id="roll-icon" uk-icon="icon: bolt"></span>&nbsp;Roll</button><button id="dry" class="uk-button uk-button-danger" type="button"><span id="roll-icon" uk-icon="icon: bolt"></span>&nbsp;Dry Run</button><input id="main-seed" class="uk-input" type="text" placeholder="Seed" aria-label="Seed" value="0"><label>Random <input id="is-random" class="uk-checkbox" type="checkbox" checked></label></form>
       </div>
 
       <div id="results" class="uk-child-width-expand uk-text-center" uk-grid uk-lightbox></div>

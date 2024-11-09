@@ -115,3 +115,16 @@ datalist option {
     border-bottom: 1px solid #394650;
     background-color: #171d21;
 }
+
+.fit-content {
+    width: auto;
+    min-width: 30px;
+    max-width: 50px;
+    max-height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+.centered-text {
+    text-align: center;
+  }
