@@ -1,7 +1,7 @@
 {
   "85": {
     "inputs": {
-      "ckpt_name": "yiffymix_v44.safetensors"
+      "ckpt_name": "v1-5-pruned-emaonly.ckpt"
     },
     "class_type": "CheckpointLoaderSimple",
     "_meta": {
@@ -10,7 +10,7 @@
   },
   "86": {
     "inputs": {
-      "text": "(by Albert Marquet, by Kinokoningen, by Mamimi \\(artist\\), by Yellowroom), antrho female (rito, peafowl:1.3), medium natural breasts,(blue feathers), beak, winged arms, hands on thighs, looking at viewer, three-quarter view, half-length portrait, (the legend of zelda, blue tribal clothing:1.25),",
+      "text": "positive prompt 1",
       "clip": [
         "208",
         0
@@ -50,7 +50,7 @@
   },
   "90": {
     "inputs": {
-      "seed": 1083700736123448,
+      "seed": 962794662932099,
       "steps": 40,
       "cfg": 7,
       "sampler_name": "dpmpp_2m",
@@ -107,7 +107,7 @@
   },
   "94": {
     "inputs": {
-      "vae_name": "furception_vae_1-0.safetensors"
+      "vae_name": "vae-ft-mse-840000-ema-pruned.ckpt"
     },
     "class_type": "VAELoader",
     "_meta": {
@@ -116,7 +116,7 @@
   },
   "96": {
     "inputs": {
-      "text":"",
+      "text": "positive prompt 2",
       "clip": [
         "208",
         0
@@ -129,7 +129,7 @@
   },
   "155": {
     "inputs": {
-      "text": "(nipples:1.25), mutilated, malformed, watermark, amputee, mosaic censorship, sketch, monochrome",
+      "text": "negative prompt",
       "clip": [
         "208",
         0

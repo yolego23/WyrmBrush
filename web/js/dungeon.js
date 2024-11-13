@@ -34,7 +34,7 @@
         let wf = {
              //'basic_portrait': '/dungeon/js/basic_portrait.json',
              //'basic_portrait_lcm': '/dungeon/js/basic_portrait_lcm.json',
-            'basic_workflow': '/dungeon/js/basic_workflow.json',
+            'basic_workflow': '/dungeon/config/basic_workflow.json',
         }
 
         for (let key in wf) {
@@ -381,6 +381,27 @@
         }
         positive = positive.replace('{{ETHNICITY}}', ethnic_bias);
 
+        
+
+        // Get Model Specific Settings
+        
+        const modelSettings = await fetch('/dungeon/config/model_config.json')
+            .then(response => response.json());
+        
+        // Get model-specific settings or use defaults
+        if (!modelSettings.basic_default) {
+            throw new Error('basic_default settings not found in model-settings.json');
+        }
+        if (!modelSettings[model]) {
+            console.warn(`Model "${model}" not found in settings, using basic_default`);
+        }
+        const settings = modelSettings[model] || modelSettings.basic_default;
+        
+        
+        sampler_name = settings.sampler_name;
+        scheduler = settings.scheduler;
+        CFG = settings.CFG;
+        
 
         // update the workflow with the selected parameters
         wf['85']['inputs']['ckpt_name'] = model; //available_checkpoints[model];
